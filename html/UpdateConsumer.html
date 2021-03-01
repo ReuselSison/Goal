@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="Shift_JIS">
+        <title>User</title>
+        <link rel="stylesheet" type="text/css" href="../style.css">
+    </head>
+    <style>
+          body{
+            background-color: lightblue;
+          }
+    </style>
+    <body class="usrreg" style="text-align: center; margin-top: 100px;">
+        <div>
+        </div>
+        <div class="usrreg">
+            <h3 class="Home-Brand">CONSUMER DATA</h3>
+            <form action="updateconsumer" method="POST">
+                <input type="text" id="fname" name="firstname" placeholder="First Name" required><br><br>
+                <input type="text" id="mname" name="middlename" placeholder="Middle Name" required><br><br>
+                <input type="text" id="lname" name="lastname" placeholder="Last Name" required><br><br>
+                <input type="text" id="address" name="address" placeholder="Address" required><br><br>
+                <input type="text" id="email" name="email" placeholder="Email Adress" required><br><br>
+                <input type="text" id="contactno" name="contactno" placeholder="Contact Number" required><br><br>
+                <label for="birthday">Birthdate:</label><br>
+                <input type="date" id="birthdate" name="birthdate" value="Birthdate"><br><br>
+                <select class="dropdown" name="gender" id="gender">
+                    <option value="0">Please Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br><br>
+                <select  class="dropdown" name="status" id="status">
+                    <option value="0">Please Select Status</option>
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="widowed">Widowed</option>
+                    <option value="separated">Separated</option>
+                    <option value="divorced">Divorced</option>
+                </select><br><br>
+                <input type="submit" class="btnsubmit" value="Edit"> &nbsp;
+                <input type="submit" class="btnsubmit" href="delete" value="Delete"> &nbsp;
+                <a class="btn" href="../main" onclick="">Cancel</a>
+            </form>
+		</div>
+	</body>
+</html>

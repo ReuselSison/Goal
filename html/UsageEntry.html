@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Usage Entry</title>
+    </head>
+    <style>
+        body{
+             margin-top: 100px; 
+             background-color: lightblue;
+             text-align:center;
+         }
+    </style>
+    <body>
+        <div class="payment">
+            <h1>Usage Entry</h1>
+            <form action="/entry" method="GET">
+                <input type="text" name="consumerid" placeholder="Customer ID"><br><br> 
+                <input type="submit" value="Search"> &nbsp;               
+            </form>
+            <form action="http://localhost:3906/usageEntry" method="POST">
+                <input type="text" name="consumerid" placeholder="Customer ID"><br><br> 
+                <label for="firstname">First Name</label><br>
+                <input type="text" disabled><br><br>
+                <label for="lastname">Last Name</label><br>
+                <input type="text" disabled><br><br>
+                <label for="bdate">Usage Date</label><br>
+                <input type="date" name="consumptiondate"><br><br>
+                <label for="pastwaterusage">Past Water Reading</label><br>
+                <input type="text" name="pastwaterusage" disabled><br><br>
+                <label for="waterusage">Current Water Reading</label><br>
+                <input type="text" name="waterusage"><br><br>
+                <input type="submit" class="btnsubmit" style="width: 95px; height: 40px;"  value="Save"> &nbsp;
+                <a class="btn" href="/main" style="width: 95px; height: 40px;" onclick="">Cancel</a>
+    
+            </form>
+           
+        </div>
+    </body>
+</html>

@@ -3,10 +3,20 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const mysql = require('mysql');
 const { json } = require('body-parser');
-const { request } = require('express');
+const  request = require('request');
 
 //Initializing variables
 var app = express();
+
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -24,38 +34,38 @@ var connection = mysql.createConnection({
     console.log('connected as id ' + connection.threadId);
   });
 
-//Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 //Routing url access
 app.get('/', function(req, res) {
-    res.send('Welcome to service API');
+    res.sendFile(__dirname + "/html/loginpage.html");
+});
+
+app.get('/login', function(req, res) {
+    res.sendFile(__dirname + "/html/loginpage.html");
 });
 
 app.post('/login', function(req, res) {
     var uname = req.body.username;
     var pass = req.body.password;
 
-    connection.query("SELECT userid, firstname, lastname, middlename, birthdate, email FROM user WHERE username = ? AND password = ?", [uname, pass], function(error, result, fields) {
+    connection.query("SELECT userid, firstname, lastname, middlename, birthdate, email FROM `user` WHERE username = ? AND password = ?", [uname, pass] , function(error, result) {
         if (error) {
             console.log(error.message);
-            res.end('Query error');
+            res.json(error);
+            res.end();
         }
 
         if (result.length > 0) {
-            //console.log(result);
-             //res.send(JSON.stringify(result));
-            // res.writeHead(301,
-            //     {Location:'http:localhost/html/MainPage.html'+ newRoom}
-            //     );
-           // res.render('http:localhost/html/MainPage.html')
-           res.send('Welcome back, ' + request.body.username + '!');
+           res.redirect('/main');
             
         } else {
             res.end('User not found!');
         }
     });
+});
+
+app.get('/main', function(req, res){
+    res.sendFile(__dirname + '/html/mainpage.html');
 });
 
 app.get('/consumerlist', function(req, res) {
@@ -67,13 +77,16 @@ app.get('/consumerlist', function(req, res) {
 
        if (result.length > 0) {
            res.send(JSON.stringify(result));
+           res.sendFile(__dirname + '/html/ConsumerList.html');
        } else {
            console.log('No data found!');
            res.end('No data found');
        }
    }) 
 });
-
+app.get('/update', function(req, res){
+    res.sendFile(__dirname + '/html/UpdateConsumer.html');
+});
 app.get('/consumer/detail/:id', function(req, res) {
     var consumerID = req.params.id;
 
@@ -120,6 +133,10 @@ app.delete('/consumer/delete/:id', function(req, res) {
     res.send('Successfully deleted data');
 })
 
+app.get('/register', function(req, res) {
+    res.sendFile(__dirname + '/html/customerregistration.html');
+});
+
 app.post('/register', function(req, res) {
     var firstname = req.body.firstname;
     var middlename = req.body.middlename;
@@ -137,10 +154,10 @@ app.post('/register', function(req, res) {
             console.log(error.message);
             res.end('Query error');
         }
-        console.log('Success');
-        res.send(JSON.stringify('Successfully saved data!'));
+        res.redirect('/main');
     });
 });
+
 app.get('/usagesearch', function(req,res){
     var consumerID = req.body.consumerid;
     console.log(consumerID);
@@ -157,6 +174,9 @@ app.get('/usagesearch', function(req,res){
             res.send('No data found');
         }
     })
+});
+app.get('/entry', function(req, res) {
+    res.sendFile(__dirname + '/html/usageentry.html');
 });
 app.post('/usageEntry', function(req, res){
     var consumerID = req.body.consumerid;
@@ -218,6 +238,9 @@ app.get('/searchpayment', function(req,res){
         }
 
     });
+});
+app.get('/payment', function(req, res) {
+    res.sendFile(__dirname + '/html/Payment.html');
 });
 app.post('/payment', function(req, res){
     var consumerID = req.body.consumerid;

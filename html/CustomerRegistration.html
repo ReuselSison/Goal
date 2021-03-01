@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="Shift_JIS">
+        <title>Registration</title>
+    </head>
+    <style>
+        body{
+            margin-top: 100px;
+            background-color: lightblue;
+        }
+        * {
+            text-align: center;
+            
+        }
+    </style>
+    <body>
+        <div class="payment">
+            <h2>CONSUMER REGISTRATION</h2>
+            <form action="/register" method="POST">
+            <input type="text" name="firstname" placeholder="First Name" required><br><br>
+            <input type="text" name="middlename" placeholder="Middle Name" required><br><br>
+            <input type="text" name="lastname" placeholder="Last Name" required><br><br>
+            <input type="text" name="address" placeholder="address" required><br><br>
+            <input  type="text" name="email" placeholder="Email Address" required> <br><br>
+            <input type="text" name="contactno" placeholder="Contact Number" required><br><br>
+            <label for="birthday">Birthdate:</label><br>
+            <input type="date" name="birthdate" value="Birthday"><br><br>
+            <select class="dropdown" name="gender" id="gender" required>
+                <option value="0">Please Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br><br>
+            <select  class="dropdown" name="status" id="status" required>
+                <option value="0">Please Select Status</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="widowed">Widowed</option>
+                <option value="separated">Separated</option>
+                <option value="divorced">Divorced</option>
+            </select><br><br>
+            <input type="submit" class="btnsubmit"  style="width: 95px; height: 30px;" value="Register" >
+            <a class="btn" href="../main" style="width: 100px;" onclick="">Cancel</a>
+            </form>
+        </div>
+    </body>
+</html>
